@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/update" method="get" th:object="${policy}">
+    <label>ID</label><input type="number" name="id" th:field="${policy.id}"><br><br>
+    <label>POLICY HOLDER NAME</label><input type="text" name="name" th:field="${policy.policyHolderName}"><br><br>
+    <label>ADDRESS LINE 1</label><input type="text" name="address1" th:field="${address.addressLine1}"><br><br>
+    <label>ADDRESS LINE 2</label><input type="text" name="address2" th:field="${address.addressLine2}"><br><br>
+    <label>STATE</label>
+    <div th:each="states:${state}">
+        <input type="radio"  th:name="'stateId'" th:value="${states.id}" th:checked="${address.states.getState()}">
+        <label th:text="${states.state}" ></label>
+    </div><br>
+    <label>COVERAGES</label>
+    <div th:each="coverges:${coverage}">
+    <input type="checkbox"  th:name="'coverageId'" th:value="${coverges.id}" th:checked="${policy.coverages.contains(coverges)}">
+    <label th:for="coverges" th:text="${coverges.coverages}" ></label>
+</div><br>
+    <button type="submit">INSERT</button>
+</form>
+</body>
+</html>
